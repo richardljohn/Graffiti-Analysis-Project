@@ -8,7 +8,7 @@ import math
 import matplotlib.pyplot as plt
 import numpy as np
 
-url = "/Users/richardjohn/Desktop/Graffiti-Analysis(Pandas)/DSNY_Graffiti_Tracking.csv"
+url = "/Users/richardjohn/Desktop/Graffiti-Analysis-Project/Graffiti-Analysis(Pandas)/DSNY_Graffiti_Tracking.csv"
 df = pd.read_csv(url)
 
 #print(df.info())
@@ -23,7 +23,6 @@ sliced_dates = dates.iloc[0:365:2]
 sliced_dates.to_frame()
 
 #print(sliced_dates)
-
 
 #ax1.set_frame_on(False)
 
@@ -42,33 +41,14 @@ plt.title("Graffiti Incidents Jan 2019 - Jan 2020")
 
 axs = sliced_dates.plot()
 
-#plt.xlabel("")
-
-#sliced_dates.plot()
-
-#sliced_dates.plot(kind = "barh")
-
-#print(dates)
-#dates[:6].plot()
-
-#dates.to_frame
-
-
-
-#dates.plot(x = [["Jan 2019", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec", "Jan 2020"]], y = "NUMBER OF INCIDENTS")
-
-#dates.plot() #We need to figure out how to ignore the x-axis' values
-
-
-#y = dates.values.tolist()
-
-#dates.plot()
 
 #boroughs = df.groupby("BOROUGH")
 Borough = df[['BOROUGH']].value_counts()
 
 #print(dates)
 
+
+#For User input
 #switch_bar = int(input("Enter which graph would you like to see\n1. Zipcodes\n2. Dates\n3.Boroughs\n0. Nothing\nSelect "))
 
 '''
@@ -85,10 +65,6 @@ Line Graphs
 
 #dates.plot()
 
-
 #print(zipc, "\n") #The amount of graffiti tags in each zipcode.
 #print(dates, "\n") #The amount of graffiti tags that occurred on a specific day.
 #print(Borough, "\n") #The amount of graffiti tags in each borough. 
-
-#Brooklyn = Borough.count('BROOKLYN') 
-#print(Borough)
