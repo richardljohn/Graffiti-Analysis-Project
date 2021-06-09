@@ -4,22 +4,16 @@
 #Graffiti from 2019 to 2020.
 
 import pandas as pd # data processing, CSV file I/O (e.g. pd.read_csv)
-import math
 import matplotlib.pyplot as plt
-import numpy as np
 
 url = "/Users/richardjohn/Desktop/Graffiti-Analysis-Project/Graffiti-Analysis(Pandas)/DSNY_Graffiti_Tracking.csv"
 df = pd.read_csv(url)
 
-#print(df.info())
-
 zips = df[["ZIP_CODE"]].value_counts()
 
-#date = df.groupby("CREATED_DATE") #Worthless
 dates = df[["CREATED_DATE"]].value_counts(sort = False)
 
-#sliced_dates = dates.iloc[0:365:2]
-#sliced_dates.to_frame()
+Borough = df[['BOROUGH']].value_counts()
 
 # Manually finding the number of incidents per month 
 Jan_2019 = df.iloc[0:2280]
@@ -36,12 +30,9 @@ Nov = df.iloc[16229:17095]
 Dec = df.iloc[17096:21294]
 Jan_2020 = df.iloc[21295: 22141]
 
-#print(sliced_dates)
-
 def plotMonthlyIncidents():
     x_ax = ["Jan 2019", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec", "Jan 2020"]
     vals = [len(Jan_2019), len(Feb), len(Mar), len(Apr), len(May), len(Jun), len(Jul), len(Aug), len(Sep), len(Oct), len(Nov), len(Dec), len(Jan_2020)]
-    
     fig = plt.figure()
     ax = fig.add_axes([0, 0, 1.2, 1.2])
     ax.bar(x_ax, vals)
@@ -51,66 +42,28 @@ def plotMonthlyIncidents():
     plt.show()
 
 def graphDisplayMenu(choice):
-    switcher = { 
-        1: zips[:15].plot(kind = 'barh'), #The 15 most vandalized Zipcodes
-        2: plotMonthlyIncidents(),
-        3: Borough.plot(kind = 'barh'),
-        0: print("Goodbye.")
-    }
-
-
-#It worked. 
-'''
-ax1 = plt.axes()
-ax1.yaxis.set_label_text('Number of Incidents')
-ax1.axes.get_xaxis().set_visible(False)
-ax1.xaxis.set_label_text('Jan 2019 - Jan 2020')
-#ax1.xaxis.label.set_label(x_ax) #Didnt work :(. Yet :)
-ax1.xaxis.label.set_visible(True)
-#ax1.set_xlabels(['two', 'four','six', 'eight', 'ten'])
-plt.title("Graffiti Incidents Jan 2019 - Jan 2020")
-axs = sliced_dates.plot()
-'''
+    if(choice == 0):
+        print("Goodbye.")
+    elif(choice == 1):
+        zips[:15].plot(kind = 'barh') #The 15 most vandalized Zipcodes
+    elif(choice == 2):
+        plotMonthlyIncidents()
+    elif(choice == 3):
+        Borough.plot(kind = 'barh')
 
 '''
-def slicedDatesGraph():
-    ax1 = plt.axes()
-    ax1.yaxis.set_label_text('Number of Incidents')
-    ax1.axes.get_xaxis().set_visible(False)
-    ax1.xaxis.set_label_text('Jan 2019 - Jan 2020')
-    #ax1.xaxis.label.set_label(x_ax) #Didnt work :(. Yet :)
-    ax1.xaxis.label.set_visible(True)
-    #ax1.set_xlabels(['two', 'four','six', 'eight', 'ten'])
-    plt.title("Graffiti Incidents Jan 2019 - Jan 2020")
-    axs = sliced_dates.plot()
+user = int(input("Enter a number: "))
+
+def graphDisplayMenu(choice):
+    if(choice == 1):
+        print("1")
+    if(choice == 2):
+        print("2")
+    if(choice == 3):
+        print(3)
 '''
-
-#boroughs = df.groupby("BOROUGH")
-Borough = df[['BOROUGH']].value_counts()
-
-#print(dates)
-
-#For User input
+    
+#For user input
+#graphDisplayMenu(user)
 switch_bar = int(input("Enter which graph would you like to see\n1. Most Vandalized Zipcodes in NYC\n2. Monthly Incidents\n3. Number of Vandalisms per Borough\n0. Exit\nEnter what you want to do: "))
-
 graphDisplayMenu(switch_bar)
-
-
-'''
-Bar Graphs
-'''
-
-#zips[:15].plot(kind = 'barh') #The 15 most vandalized Zipcodes
-#dates[:10].plot()#The top 10 days of the years (2019-2020) of when vandalized occurred the most.
-#Borough.plot(kind = 'barh') #The total number of vandalism in each borough.
-
-
-'''
-Line Graphs
-'''
-
-#dates.plot()
-
-#print(zipc, "\n") #The amount of graffiti tags in each zipcode.
-#print(dates, "\n") #The amount of graffiti tags that occurred on a specific day.
-#print(Borough, "\n") #The amount of graffiti tags in each borough. 
